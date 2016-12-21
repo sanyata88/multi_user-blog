@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+{% block content %}
+  {% for post in posts %}
+    <h2>{{ post.subject }} by {{ post.author.username }}</h2>
+    <h3>Posted on: {{ post.created.strftime("%b %d, %Y") }}</h3>
+    <article>{{ post.content }}</article>
+    {% if post.author.username == user.username %}
+      <div class="author-options">
+        <a href="/blog/edit?post={{ post.key.id() }}">Edit</a>
+        <a href="/blog/delete?post={{ post.key.id() }}">Delete</a>
+      </div>
+    {% endif %}
+    <a href="/blog/{{ post.key.id() }}">Read more</a>
+    <br>
+  {% endfor %}
+  <br>
+  {% if user.email == "anthony.fumagalli@gmail.com" %}
+    <a href="/blog/newpost">Create new post</a>
+  {% endif %}
+{% endblock %}

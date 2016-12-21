@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+{% block content %}
+  <h1>Signup</h1>
+  <form method="post">
+    <label>Username</label>
+    <div class="error">
+      {% if user_error %}
+        That's not a valid username.
+      {% endif %}
+      {% if exist_error %}
+        That username already exists.
+      {% endif %}
+    </div>
+    <input name="username" value="{{ username }}">
+    <label>Password</label>
+    <div class="error">
+      {% if pwd_error %}
+        That's not a valid password.
+      {% endif %}
+    </div>
+    <input type="password" name="password">
+    <label>Verify Password</label>
+    <div class="error">
+      {% if verify_error %}
+        Passwords do not match.
+      {% endif %}
+    </div>
+    <input type="password" name="verify">
+    <label>Email (optional)</label>
+    <div class="error">
+      {% if email_error %}
+        That's not a valid email.
+      {% endif %}
+    </div>
+    <input name="email" value="{{ email }}">
+    <br>
+    <input type="Submit">
+  </form>
+{% endblock %}
