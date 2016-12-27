@@ -1,5 +1,9 @@
 import os
 import re
+import codecs
+import hashlib
+import hmac
+import random
 from string import letters
 
 import webapp2
@@ -16,6 +20,7 @@ def render_str(template, **params):
     return t.render(params)
 
 class BlogHandler(webapp2.RequestHandler):
+    """functions for page rendering and setting cookies"""
     def write(self, *a, **kw):
         self.response.out.write(*a, **kw)
 
@@ -28,10 +33,11 @@ class BlogHandler(webapp2.RequestHandler):
 def render_post(response, post):
     response.out.write('<b>' + post.subject + '</b><br>')
     response.out.write(post.content)
-
+        
+    
 class MainPage(BlogHandler):
   def get(self):
-      self.write('Hello, Udacity!')
+      self.render("base.html")
 
 ##### blog stuff
 
@@ -79,6 +85,7 @@ class NewPost(BlogHandler):
         else:
             error = "subject and content, please!"
             self.render("newpost.html", subject=subject, content=content, error=error)
+
 
 
 
@@ -141,7 +148,9 @@ class Signup(BlogHandler):
         if have_error:
             self.render('signup-form.html', **params)
         else:
-            self.redirect('/unit2/welcome?username=' + username)
+            self.redirect('/blog/newpost')
+            
+
 
 class Welcome(BlogHandler):
     def get(self):
@@ -158,5 +167,7 @@ app = webapp2.WSGIApplication([('/', MainPage),
                                ('/blog/?', BlogFront),
                                ('/blog/([0-9]+)', PostPage),
                                ('/blog/newpost', NewPost),
+                               ('/login', LoginHandler),
+                               ('/logout', LogoutHandler)
                                ],
                               debug=True)
