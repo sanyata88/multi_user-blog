@@ -13,3 +13,23 @@
     {{p._render_text | safe}}
   </div>
 </div>
+<h3>Comments</h3>
+ {% for comment in comments %}
+   <div class="comment-author">
+     {% if comment.author %}
+       {{ comment.author.username }} wrote:
+     {% else %}
+       anonymous wrote:
+     {% endif %}
+   </div>
+   <div class="comment-content">
+     {{ comment.content }}
+   </div>
+   {% if comment.author.username == user.username %}
+       <div class="author-options">
+         <a href="/comment/edit?comment={{ comment.key.id() }}">Edit</a>
+         <a href="/comment/delete?comment={{ comment.key.id() }}">Delete</a>
+       </div>
+     {% endif %}
+   <br>
+ {% endfor %}
