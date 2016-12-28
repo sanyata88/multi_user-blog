@@ -1,0 +1,210 @@
+body {
+    position: relative;
+    font-family: Helvetica, Arial, sans-serif;
+    font-size: 14px;
+    width: 800px;
+    margin: 0 auto;
+    padding: 10px;
+    color: #333;
+}
+
+.login-area {
+    font-size: 13px;
+    color: gray;
+    position: absolute;
+    top: 10px;
+    right: 10px;
+}
+
+.login-link {
+    color: gray;
+    text-decoration: none;
+}
+
+.login-link:visited {
+    color: gray;
+}
+
+.login-link:hover {
+    text-decoration: underline;
+}
+
+h2 {
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 20px;
+
+}
+
+h1 {
+  color: #F4431D;
+}
+
+img {
+    display: block;
+    margin: 0 auto;
+    width: 250px;
+}
+
+.error {
+    color: red;
+}
+
+label {
+  display: block;
+  font-size: 20px;
+  font-weight: bolder;
+}
+
+label + label {
+    margin-top: 10px;
+    font-weight: bolder;
+}
+
+input {
+    margin-top: 10px;
+
+    margin-bottom: 10px;
+    max-width: 200px;
+    border: solid black thin;
+}
+.sub{
+  float: right;
+  color: black;
+  font-weight: bolder;
+  font-size: 18px;
+}
+button {
+  font-size: 15px;
+  border: none;
+  border-radius: 6px;
+  background-color: #F4431D;
+  margin-top: 20px;
+  color:white;
+  width:100px;
+}
+.edit{
+  font-size: 15px;
+  border: none;
+  padding:5px;
+  padding-left: 20px;
+  padding-right:20px;
+  border-radius: 6px;
+  background-color: #F4431D;
+  margin-top: 20px;
+  color:white;
+  width:200px;
+}
+textarea {
+  width: 500px;
+  height: 400px;
+  font-size: 17px;
+  font-family: monospace;
+}
+
+input[type=submit] {
+  font-size: 15px;
+  border: none;
+  border-radius: 6px;
+  background-color: #F4431D;
+  margin-top: 20px;
+  color:white;
+  width:100px;
+}
+.subject {
+  margin-left: 0px;
+  height: 20px;
+  width: 100px;
+}
+.main-title {
+    display: block;
+    color: #F4431D;
+    font-size: 40px;
+    font-weight: bold;
+    text-align: center;
+    margin-bottom: 5px;
+    text-decoration: none;
+}
+
+.sub-title {
+    display: block;
+    color: #222;
+    font-size: 30px;
+    font-weight: bold;
+    text-align: center;
+    margin-bottom: 30px;
+    text-decoration: none;
+}
+
+.post + .post {
+    margin-top: 15px;
+}
+
+.post-heading {
+    position: relative;
+    border-bottom: 3px solid #666;
+}
+
+.post-title {
+    font-size: 24px;
+    font-weight: bold;
+
+    text-decoration: none;
+    color: #333;
+}
+
+.post-title:visisted {
+    color: #333;
+}
+
+.post-date {
+    position: absolute;
+    right: 0px;
+    bottom: 0px;
+    color: #999;
+
+}
+
+.post-content {
+    margin-top: 5px;
+}
+
+.age {
+    position: absolute;
+    bottom: 0px;
+    right: 0px;
+    color: gray;
+    font-size: 12px;
+}
+
+.navigation {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    background-color: orange;
+}
+
+.nav-item {
+    float: left;
+}
+
+.nav-item a {
+    display: block;
+    color: white;
+    font-weight: bolder;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+}
+
+/* Change the link color to #111 (black) on hover */
+.nav-item a:hover {
+    background-color: white;
+    color: #333;
+}
+
+.like {
+    background-color: blue;
+    color: white;
+}

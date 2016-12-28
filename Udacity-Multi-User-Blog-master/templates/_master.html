@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>Fox Blogs</title>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css"
+              integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+        <link type="text/css" rel="stylesheet" href="/static/css/main.css" />
+    </head>
+    <body>
+      <a href="/" class="main-title">Fox Blogs</a>
+      <p class="sub-title">Express yourself : Blogger!</p>
+      <ul class="navigation">
+          <li class="nav-item"><a href="/">Home</a></li>
+          <li class="nav-item"><a href="/login">Login</a></li>
+          <li class="nav-item"><a href="/register">Sign up</a></li>
+      </ul>
+      <img src = "/static/img/logo.jpg" alt="fox">
+      <div class="login-area">
+
+          {% if user %}
+          <a href="/account">{{user.user_name}}</a> (<a href="/logout">Sign Out</a>)
+          {% else %}
+          <a class="login-link" href="/login">Login</a>
+          |
+          <a class="login-link" href="/register">Sign Up</a>
+          {% endif %}
+
+      </div>
+
+      <div>
+          {% if user %}
+          <a href="/newpost" class = "main-title">Add Post</a>
+          {% endif %}
+      </div>
+      {% block content %}
+      {% endblock %}
+      <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+      {% block script %}
+      {% endblock %}
+</body>
+</html>
