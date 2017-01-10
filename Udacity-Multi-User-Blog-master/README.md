@@ -11,4 +11,4 @@ To run locally:
 4. Create New Application...
 5. Copy files from this repo to where the new application in step 4 is located locally
 6. Run the new application
-7. Select Browse whenthe application has finished initizing
+7. Select Browse when the application has finished initializing

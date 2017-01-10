@@ -11,7 +11,7 @@
 
 <form action="\delete" method="post">
     <input type="hidden" value="{{ post.key.id() }}" name="postid">
-    <div >
+    <div  class="text-right">
         <a class = "edit" href="/editpost/{{ post.key.id() }}">Edit Post</a>
         <br>
         <input type="submit" value="Delete">
@@ -20,8 +20,8 @@
 
 {% else %}
 {% if user %}
-<div class="edit">
-    <a href="/addlike/{{ post.key.id() }}" class="edit">{{ like }}</a>
+<div class="text-right">
+    <a href="/addlike/{{ post.key.id() }}" class="edit">like</a>
 </div>
 {% endif %}
 {% endif %}
@@ -31,62 +31,44 @@
   </p>
 </div>
 
-<div>
-  <h5>
-      Created: {{ post.post_created.strftime("%b %d, %Y") }}
-  </h5>
-</div>
-<div>
-    <h5 class="sub">
-        Author: {{ post.post_author }}
-    </h5>
-</div>
-
 {% for c in comments %}
 
-<div>
-  <h5>
-      Author: {{ c.comment_author }} <br />
-      {{ c.comment_created.strftime("%b %d, %Y  %H:%M") }}
-  </h5>
-</div>
-<div>
-  <p>
-      {{ c.comment_text }}
-  </p>
-</div>
-{% if c.comment_author == user.user_name %}
-<div>
-  <form action="/deletecomment" method="post">
-      <input type="hidden" value="{{ c.key.id() }}" name="comment_id" />
-      <input type="submit" class="btn btn-danger" value="Delete">
-  </form>
-</div>
-{% endif %}
-</div>
+  <h3 class="sub text-right">
+    Author: {{ c.comment_author }}
+  </h3>
+  <div>
+    <p>
+        {{ c.comment_text }}
+    </p>
+  </div>
+  {% if c.comment_author == user.user_name %}
+    <div>
+      <form action="/deletecomment" method="post">
+          <input type="hidden" value="{{ c.key.id() }}" name="comment_id" />
+          <input type="submit" class="edit" value="Delete">
+      </form>
+      <form action="/editcomment" method="post">
+          <input type="hidden" value="{{ post.key.id() }}" name="post_id" />
+          <input type="submit" value="Edit">
+      </form>
+    </div>
+  {% endif %}
 {% endfor %}
-{% if user %}
 
+{% if user %}
 <div>
   <form method="post" action="\addcomment">
     <div>
         <input type="hidden" value="{{ post.key.id() }}" name="post_id" />
         <label for="content">comment:</label>
-        <textarea name="content" class="form-control" placeholder="comment" id="content"></textarea>
+        <textarea name="content" placeholder="comment"></textarea>
     </div>
 
     <div>
-        <input type="submit" class="btn btn-primary" value="Submit">
+        <input type="submit" class="edit" value="Submit">
     </div>
 
   </form>
 </div>
-
 {% endif %}
-{% endblock %}
-
-{% block script %}
-<script src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.15.0/jquery.validate.min.js"></script>
-<script src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.15.0/additional-methods.min.js"></script>
-<script src="../static/js/addcomment.js" type="text/javascript"></script>
 {% endblock %}

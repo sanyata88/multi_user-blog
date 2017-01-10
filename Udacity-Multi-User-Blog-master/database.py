@@ -140,3 +140,4 @@ class Comment(ndb.Model):
             return True
         else:
             return False
+    

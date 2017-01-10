@@ -237,9 +237,12 @@ class EditComment(MasterHandler):
         user = self.user
         post_id = self.request.get('post_id')
         content = self.request.get('content')
+        print post_id
+        print content
+ 
         if post_id and content:
             database.Comment.addComment(post_id = post_id, text = content, author = user.user_name)
-            return self.redirect('/post/'+post_id)
+            return self.redirect('/')
         else:
             return self.error()
         
