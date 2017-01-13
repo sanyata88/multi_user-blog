@@ -79,6 +79,7 @@ class LikePost(ndb.Model):
     like_post = ndb.StringProperty(required = True)
     like_author = ndb.StringProperty(required = True)
     like_create = ndb.DateTimeProperty(auto_now_add = True)
+    like_count = ndb.IntegerProperty(default=0)
 
     @classmethod
     def addLike(cls, post_id, author):

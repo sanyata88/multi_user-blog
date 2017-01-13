@@ -31,11 +31,14 @@
   </p>
 </div>
 
+<hr>
+<p> Comments: </p>
+
 {% for c in comments %}
 
-  <h3 class="sub text-right">
+  <span class=" text-right">
     Author: {{ c.comment_author }}
-  </h3>
+  </span>
   <div>
     <p>
         {{ c.comment_text }}
@@ -45,12 +48,17 @@
     <div>
       <form action="/deletecomment" method="post">
           <input type="hidden" value="{{ c.key.id() }}" name="comment_id" />
-          <input type="submit" class="edit" value="Delete">
+          <input type="submit" value="Delete">
       </form>
-      <form action="/editcomment" method="post">
+      <form action="/editcomment" method="get">
+        <a href="/editcomment/{{ c.key.id() }}">Edit</a>
+      </form>
+      <!-- <form action="/editcomment">
           <input type="hidden" value="{{ post.key.id() }}" name="post_id" />
+          <input type = "hidden" value ="{{c.comment_text}}" name="content" />
           <input type="submit" value="Edit">
-      </form>
+      </form> -->
+
     </div>
   {% endif %}
 {% endfor %}

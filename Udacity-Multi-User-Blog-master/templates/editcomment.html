@@ -1,0 +1,18 @@
+{% extends "_master.html" %}
+
+{% block content %}
+
+    <div class="newpost">
+        <div class="newpost__form">
+            <form method="post" autocomplete="off">
+                <textarea autofocus class="form__textarea" placeholder="update your comment..." type="text" name="comment">{{content}}</textarea>
+                <br>
+                <input type="submit" value="save">
+                <input type="submit" value="cancel">
+                <span class="form__message">{{error}}</span>
+            </form>
+        </div>
+    </div>
+
+
+{% endblock %}

@@ -45,7 +45,7 @@ class MasterHandler(webapp2.RequestHandler):
     def render_str(self, template, **params):
         params['user'] = self.user
         return render_str(template, **params)
-        
+
     def render(self, template, **kw):
         self.write(self.render_str(template, **kw))
 
@@ -134,7 +134,7 @@ class LogoutPage(MasterHandler):
         self.logout()
         self.redirect('/')
 
-        
+
 
 class PostPage(MasterHandler):
     def get(self, post_id):
@@ -197,7 +197,7 @@ class EditPostPage(MasterHandler):
 class DeletePost(MasterHandler):
     def get(self):
         self.redirect('/')
-    
+
     def post(self):
         if not self.user:
             return self.redirect('/')
@@ -228,28 +228,28 @@ class AddComment(MasterHandler):
             return self.redirect('/post/'+post_id)
         else:
             return self.error()
-                
+
 class EditComment(MasterHandler):
-    def post(self):
+
+    def get(self, comment_id):
+        self.render('editcomment.html')
+    def post(self, comment_id):
         if not self.user:
             return self.redirect('/')
+        comment_id = self.request.get('comment_id')
+        commentObj = database.Comment.getComment(comment_id)
+        comment = self.request.get('comment')
+        if comment:
+            commentObj.comment_text = comment
+            commentObj.put()
+            post = Post.get_by_id(int(comment.comment_post))
+            self.redirect('/post/%s')
 
-        user = self.user
-        post_id = self.request.get('post_id')
-        content = self.request.get('content')
-        print post_id
-        print content
- 
-        if post_id and content:
-            database.Comment.addComment(post_id = post_id, text = content, author = user.user_name)
-            return self.redirect('/')
-        else:
-            return self.error()
-        
+
 class DeleteComment(MasterHandler):
     def get(self):
         self.redirect('/')
-    
+
     def post(self):
         if not self.user:
             return self.redirect('/')
@@ -264,7 +264,7 @@ class DeleteComment(MasterHandler):
                 return self.redirect('/')
         else:
             self.error(401)
-            return 
+            return
 
 class AddLike(MasterHandler):
     def get(self, post_id):
@@ -290,12 +290,12 @@ class AddLike(MasterHandler):
             database.Comment.addComment(post_id = post_id, text = content, author = user.user_name)
             return self.redirect('/post/'+post_id)
         else:
-            return self.error() 
-        
+            return self.error()
+
 class DeleteLike(MasterHandler):
     def get(self):
         self.redirect('/')
-    
+
     def post(self):
         if not self.user:
             return self.redirect('/')
@@ -324,7 +324,7 @@ app = webapp2.WSGIApplication([
     ('/post/([0-9]+)', PostPage),
     ('/delete', DeletePost),
     ('/addcomment', AddComment),
-    ('/editcomment', EditComment),
+    ('/editcomment/([0-9]+)', EditComment),
     ('/deletecomment', DeleteComment),
     ('/addlike/([0-9]+)', AddLike),
     ('/deletelike', DeleteLike),
