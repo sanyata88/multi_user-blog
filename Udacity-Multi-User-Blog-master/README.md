@@ -1,12 +1,12 @@
 # Udacity-Multi-User-Blog
 Project 3 of Udacity's Full Stack Nanodegree
 
-Hosted version: http://udacity-multi-user-blog.appspot.com/
+Hosted version: https://udacity-multi-user-blog-156122.appspot.com/
 
 To run locally:
 
 1. Download and Install Python 2.7 https://www.python.org/downloads/
-2. Dowanload and Install Google App Engine SDK for Python https://cloud.google.com/appengine/downloads#Google_App_Engine_SDK_for_Python
+2. Download and Install Google App Engine SDK for Python https://cloud.google.com/appengine/downloads#Google_App_Engine_SDK_for_Python
 3. Run the Google App Engine Launcher
 4. Create New Application...
 5. Copy files from this repo to where the new application in step 4 is located locally

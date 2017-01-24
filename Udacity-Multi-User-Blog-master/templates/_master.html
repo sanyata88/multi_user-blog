@@ -10,11 +10,12 @@
     </head>
     <body>
       <a href="/" class="main-title">Fox Blogs</a>
-      <p class="sub-title">Express yourself : Blogger!</p>
+      <p class="sub-title">Expressions : Blogger!</p>
       <ul class="navigation">
           <li class="nav-item"><a href="/">Home</a></li>
           <li class="nav-item"><a href="/login">Login</a></li>
           <li class="nav-item"><a href="/register">Sign up</a></li>
+          <li class="nav-item"><a href="/newpost">New Post</a></li>
       </ul>
       <img src = "/static/img/logo.jpg" alt="fox">
       <div class="login-area">
@@ -31,7 +32,7 @@
 
       <div>
           {% if user %}
-          <a href="/newpost" class = "main-title">Add Post</a>
+          <a href="/newpost" class = "main-title">Post</a>
           {% endif %}
       </div>
       {% block content %}

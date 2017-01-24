@@ -4,6 +4,7 @@ import random
 import hashlib
 import hmac
 import database
+import time
 from string import letters
 
 import webapp2
@@ -168,6 +169,7 @@ class AddPostPage(MasterHandler):
         post_id = database.Post.addPost(title = title,
                                         content = content,
                                         author = author)
+        time.sleep(0.2)
         self.redirect('/post/' + str(post_id))
 
 
@@ -230,20 +232,22 @@ class AddComment(MasterHandler):
             return self.error()
 
 class EditComment(MasterHandler):
-
-    def get(self, comment_id):
-        self.render('editcomment.html')
-    def post(self, comment_id):
+    def get(self,post_id,comment_id):
+        commentObj = database.Comment.get_by_id(int(comment_id))
+        self.render('editcomment.html', content = commentObj.comment_text)
+    def post(self, post_id,comment_id):
         if not self.user:
             return self.redirect('/')
-        comment_id = self.request.get('comment_id')
-        commentObj = database.Comment.getComment(comment_id)
-        comment = self.request.get('comment')
-        if comment:
-            commentObj.comment_text = comment
+
+        commentObj = database.Comment.get_by_id(int(comment_id))
+        content = self.request.get('content')
+        if content:
+            commentObj.comment_text = content
             commentObj.put()
-            post = Post.get_by_id(int(comment.comment_post))
-            self.redirect('/post/%s')
+            time.sleep(0.2)
+            return self.redirect('/post/'+post_id)
+        else:
+            return self.error()
 
 
 class DeleteComment(MasterHandler):
@@ -324,7 +328,7 @@ app = webapp2.WSGIApplication([
     ('/post/([0-9]+)', PostPage),
     ('/delete', DeletePost),
     ('/addcomment', AddComment),
-    ('/editcomment/([0-9]+)', EditComment),
+    ('/editcomment/([0-9]+)/([0-9]+)', EditComment),
     ('/deletecomment', DeleteComment),
     ('/addlike/([0-9]+)', AddLike),
     ('/deletelike', DeleteLike),

@@ -7,11 +7,16 @@
       {{ post.post_title }}
   </h2>
 </div>
+<div>
+  <p>
+      {{ post.post_content | safe}}
+  </p>
+</div>
 {% if post.post_author == user.user_name %}
 
 <form action="\delete" method="post">
     <input type="hidden" value="{{ post.key.id() }}" name="postid">
-    <div  class="text-right">
+    <div>
         <a class = "edit" href="/editpost/{{ post.key.id() }}">Edit Post</a>
         <br>
         <input type="submit" value="Delete">
@@ -25,25 +30,20 @@
 </div>
 {% endif %}
 {% endif %}
-<div>
-  <p>
-      {{ post.post_content | safe}}
-  </p>
-</div>
+
 
 <hr>
-<p> Comments: </p>
+<h2> Comments: </h2>
 
 {% for c in comments %}
-
-  <span class=" text-right">
+  <div>
+    <h3>
+        {{ c.comment_text }}
+    </h3>
+  </div>
+  <span class="text-right">
     Author: {{ c.comment_author }}
   </span>
-  <div>
-    <p>
-        {{ c.comment_text }}
-    </p>
-  </div>
   {% if c.comment_author == user.user_name %}
     <div>
       <form action="/deletecomment" method="post">
@@ -51,25 +51,20 @@
           <input type="submit" value="Delete">
       </form>
       <form action="/editcomment" method="get">
-        <a href="/editcomment/{{ c.key.id() }}">Edit</a>
+        <a href="/editcomment/{{post.key.id()}}/{{ c.key.id() }}">Edit Comment</a>
       </form>
-      <!-- <form action="/editcomment">
-          <input type="hidden" value="{{ post.key.id() }}" name="post_id" />
-          <input type = "hidden" value ="{{c.comment_text}}" name="content" />
-          <input type="submit" value="Edit">
-      </form> -->
 
     </div>
   {% endif %}
 {% endfor %}
-
+<hr>
+<hr>
 {% if user %}
 <div>
   <form method="post" action="\addcomment">
     <div>
         <input type="hidden" value="{{ post.key.id() }}" name="post_id" />
-        <label for="content">comment:</label>
-        <textarea name="content" placeholder="comment"></textarea>
+        <textarea name="content" placeholder="Add Comment"></textarea>
     </div>
 
     <div>
